@@ -1,0 +1,8 @@
+create database FilmeDB;
+use FilmeDb;
+show tables;
+
+select * from entityutil;
+select * from address;
+select * from phone;
+select * from user;
