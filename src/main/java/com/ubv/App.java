@@ -2,6 +2,7 @@ package com.ubv;
 
 import java.util.Date;
 
+import com.ubv.entity.Address;
 import com.ubv.entity.Phone;
 import com.ubv.entity.PhoneNetwork;
 import com.ubv.entity.User;
@@ -48,14 +49,25 @@ public class App {
 		u.setCreationTimestamp(new Date(System.currentTimeMillis()));
 		u.setName("RR");
 
-		Phone phone = new Phone();
-		phone.setCreationTimestamp(new Date(System.currentTimeMillis()));
-		phone.setPhoneNetwork(PhoneNetwork.DIGI);
-		phone.setPhoneNr("0777123456");
-		
-		u.setPhone(phone);
-		
+		Phone p = new Phone();
+		p.setCreationTimestamp(new Date(System.currentTimeMillis()));
+		p.setPhoneNetwork(PhoneNetwork.DIGI);
+		p.setPhoneNr("PhoneInUser");
+
+		u.setPhone(p);
+		p.setUser(u);
+
+		Address a = new Address();
+		a.setCreationTimestamp(new Date(System.currentTimeMillis()));
+		a.setNr(715);
+		a.setPostalCode(507080);
+		a.setStreet("Strada");
+		a.setUsers(u);
+
+		u.setAddress(a);
+
 		UserService us = new UserService();
 		us.persist(u);
+
 	}
 }

@@ -30,6 +30,5 @@
 		<mapping class="com.ubv.entity.Phone" />
 		<mapping class="com.ubv.entity.User" />
 		<mapping class="com.ubv.entity.Movie" />
-		<mapping class="com.ubv.entity.EntityUtil" />
 	</session-factory>
 </hibernate-configuration>

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,12 +33,12 @@ public class User {
 	@Column
 	private String name;
 
-	@ManyToOne
-//	@JoinColumn(name="cart_id", nullable=false)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Phone phone;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private Set<Phone> phones = new HashSet<Phone>();
 
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(name = "User_Movie", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
@@ -73,12 +73,12 @@ public class User {
 		this.address = address;
 	}
 
-	public Phone getPhone() {
-		return phone;
+	public Set<Phone> getPhone() {
+		return phones;
 	}
 
 	public void setPhone(Phone phone) {
-		this.phone = phone;
+		this.phones.add(phone);
 	}
 
 	public Set<Movie> getMovies() {

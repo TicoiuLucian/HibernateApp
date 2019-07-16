@@ -1,6 +1,7 @@
 package com.ubv.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ public class Address {
 	private long postalCode;
 
 	@OneToMany(mappedBy = "address")
-	private Set<User> users;
+	private Set<User> users = new HashSet<User>();
 	
 
 	public int getId() {
@@ -79,8 +80,8 @@ public class Address {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setUsers(User user) {
+		this.users.add(user);
 	}
 
 }
