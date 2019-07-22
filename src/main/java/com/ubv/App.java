@@ -38,6 +38,7 @@ public class App {
 
 		UserService us = new UserService();
 		us.persist(u);
+		
 
 	}
 }

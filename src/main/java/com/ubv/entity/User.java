@@ -15,10 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name = "User") // name not required
 public class User {
 
 	@Id
@@ -26,14 +28,15 @@ public class User {
 	@Column(name = "id")
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationTimestamp;
 
-	@Column
+	@Column(nullable = false, length = 50, unique = true)
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@OneToMany(cascade = CascadeType.ALL)
