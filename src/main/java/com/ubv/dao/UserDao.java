@@ -37,43 +37,28 @@ public class UserDao implements EntityDao<User, Integer> {
 		currentSession.close();
 	}
 
-	public Session getCurrentSession() {
-		return currentSession;
-	}
-
-	public void setCurrentSession(Session currentSession) {
-		this.currentSession = currentSession;
-	}
-
-	public Transaction getCurrentTransaction() {
-		return currentTransaction;
-	}
-
-	public void setCurrentTransaction(Transaction currentTransaction) {
-		this.currentTransaction = currentTransaction;
-	}
-
 	public void persist(User entity) {
-		getCurrentSession().save(entity);
+		currentSession.save(entity);
 	}
 
 	public void update(User entity) {
-		getCurrentSession().update(entity);
+		currentSession.update(entity);
 	}
 
 	public User findById(Integer id) {
-		User user = (User) getCurrentSession().get(User.class, id);
+		User user = (User) currentSession.get(User.class, id);
 		return user;
 	}
 
 	public void delete(User entity) {
-		getCurrentSession().delete(entity);
+		currentSession.delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> findAll() {
-		List<User> users = (List<User>) getCurrentSession().createQuery("from User").list();
+		List<User> users = (List<User>) currentSession.createQuery("from User").list();
 		return users;
+//		return currentSession.createQuery("SELECT a FROM User a", User.class).getResultList(); 
 	}
 
 	public void deleteAll() {
