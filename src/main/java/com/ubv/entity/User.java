@@ -43,7 +43,7 @@ public class User {
 	@JoinColumn(name = "user_id")
 	private Set<Phone> phones = new HashSet<Phone>();
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "User_Movie", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "movie_id") })
 	Set<Movie> movies = new HashSet<>();
